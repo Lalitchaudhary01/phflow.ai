@@ -49,7 +49,7 @@ const StepProgress = ({ currentStep }) => {
             {index < steps.length - 1 &&
               (currentStep > step.id || step.completed) && (
                 <div
-                  className="absolute top-4 left-8 h-0.5 bg-green-500 z-0"
+                  className="absolute top-4 left-8 h-0.5 bg-gray-500 z-0"
                   style={{ width: "calc(100vw / 3 - 4rem)" }}
                 ></div>
               )}
