@@ -11,17 +11,20 @@ const StepProgress = ({ currentStep }) => {
   return (
     <div className="mb-8">
       {/* Desktop Progress */}
-      <div className="hidden sm:flex items-center justify-between">
+      <div className="hidden sm:flex items-center justify-between relative">
+        {/* Background line */}
+        <div className="absolute top-4 left-4 right-4 h-0.5 bg-gray-300"></div>
+
         {steps.map((step, index) => (
-          <div key={step.id} className="flex items-center">
+          <div key={step.id} className="flex items-center relative">
             <div className="flex flex-col items-center">
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium relative z-10 ${
                   step.completed
                     ? "bg-green-500 text-white"
                     : currentStep === step.id
                     ? "bg-teal-600 text-white"
-                    : "bg-gray-300 text-gray-600"
+                    : "bg-white border-2 border-gray-300 text-gray-600"
                 }`}
               >
                 {step.completed ? <Check className="w-4 h-4" /> : step.id}
@@ -36,12 +39,10 @@ const StepProgress = ({ currentStep }) => {
                 {step.name}
               </span>
             </div>
-            {index < steps.length - 1 && (
-              <div
-                className={`w-16 lg:w-24 h-0.5 mx-4 ${
-                  step.completed ? "bg-green-500" : "bg-gray-300"
-                }`}
-              />
+
+            {/* Progress line overlay */}
+            {index < steps.length - 1 && step.completed && (
+              <div className="absolute top-4 left-8 w-full h-0.5 bg-green-500 z-0"></div>
             )}
           </div>
         ))}
@@ -54,7 +55,9 @@ const StepProgress = ({ currentStep }) => {
             className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
               steps[currentStep - 1].completed
                 ? "bg-green-500 text-white"
-                : "bg-blue-500 text-white"
+                : currentStep === steps[currentStep - 1].id
+                ? "bg-teal-600 text-white"
+                : "bg-gray-300 text-gray-600"
             }`}
           >
             {steps[currentStep - 1].completed ? (
@@ -65,7 +68,13 @@ const StepProgress = ({ currentStep }) => {
           </div>
         </div>
         <div className="text-center">
-          <span className="text-teal-600 font-medium text-sm">
+          <span
+            className={`text-sm font-medium ${
+              currentStep === steps[currentStep - 1].id
+                ? "text-teal-600"
+                : "text-gray-600"
+            }`}
+          >
             {steps[currentStep - 1].name}
           </span>
           <div className="text-xs text-gray-500 mt-1">
