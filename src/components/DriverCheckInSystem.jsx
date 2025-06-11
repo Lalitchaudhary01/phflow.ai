@@ -4,6 +4,7 @@ import StepProgress from "./StepProgress";
 import DriverInformation from "./DriverInformation";
 import DocsCheck from "./DocsCheck";
 import VehicleInformation from "./VehicleInformation";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const DriverCheckInSystem = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -87,12 +88,13 @@ const DriverCheckInSystem = () => {
             <button
               onClick={handleBack}
               disabled={currentStep === 1}
-              className={`px-4 sm:px-6 py-2 rounded-lg font-medium text-sm sm:text-base ${
+              className={`flex items-center gap-2 px-4 sm:px-6 py-2 rounded-lg font-medium text-sm sm:text-base ${
                 currentStep === 1
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
+              <ChevronLeft size={16} />
               BACK
             </button>
 
@@ -108,9 +110,10 @@ const DriverCheckInSystem = () => {
             {currentStep < 3 ? (
               <button
                 onClick={handleNext}
-                className="px-4 sm:px-6 py-2 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-600 transition-colors text-sm sm:text-base"
+                className="flex items-center gap-2 px-4 sm:px-6 py-2 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-600 transition-colors text-sm sm:text-base"
               >
                 NEXT
+                <ChevronRight size={16} />
               </button>
             ) : (
               <button

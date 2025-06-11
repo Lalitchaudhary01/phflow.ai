@@ -139,9 +139,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 </Link>
               ) : (
                 <div
-                  className={`flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-50 transition-colors duration-150 ${
-                    item.active ? "bg-gray-100 text-gray-800" : "text-gray-600"
-                  }`}
+                  className={`flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-50 transition-colors duration-150 text-gray-600`}
                   onClick={() => item.subItems && toggleExpanded(item.label)}
                 >
                   <item.icon className="w-4 h-4 mr-3 text-gray-500" />
@@ -162,8 +160,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                       key={subIndex}
                       to={subItem.path}
                       className={`flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-50 transition-colors duration-150 ${
-                        subItem.active
-                          ? "text-gray-800 font-medium bg-gray-50"
+                        location.pathname === subItem.path
+                          ? "text-gray-800 font-medium bg-gray-200"
                           : "text-gray-600"
                       }`}
                       onClick={onClose}
