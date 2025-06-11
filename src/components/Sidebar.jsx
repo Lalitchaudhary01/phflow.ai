@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import PersonIcon from "@mui/icons-material/Person";
 import {
-  Home,
-  Truck,
-  User,
-  Package2,
-  Eye,
-  CheckCircle2,
-  FileText,
-  Settings,
-  Archive,
-  FileCheck,
-  ChevronUp,
-  ChevronDown,
-} from "lucide-react";
+  Person as PersonIcon,
+  Home as HomeIcon,
+  LocalShipping as TruckIcon,
+  People as UserIcon,
+  Inventory2 as Package2Icon,
+  Visibility as EyeIcon,
+  CheckCircle as CheckCircle2Icon,
+  Description as FileTextIcon,
+  Settings as SettingsIcon,
+  Archive as ArchiveIcon,
+  AssignmentTurnedIn as FileCheckIcon,
+  ExpandLess as ChevronUpIcon,
+  ExpandMore as ChevronDownIcon,
+} from "@mui/icons-material";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
@@ -30,62 +30,62 @@ const Sidebar = ({ isOpen, onClose }) => {
   };
 
   const sidebarItems = [
-    { icon: Home, label: "Home", active: false, path: "/" },
+    { icon: HomeIcon, label: "Home", active: false, path: "/" },
     {
-      icon: Truck,
+      icon: TruckIcon,
       label: "Inbound Logistic",
       active: true,
       subItems: [
         {
-          icon: User,
+          icon: PersonIcon,
           label: "Driver Check-In",
           active: location.pathname === "/driver-checkin",
           path: "/driver-checkin",
         },
         {
-          icon: Package2,
+          icon: Package2Icon,
           label: "Material Offloading",
           active: location.pathname === "/material-offloading",
           path: "/material-offloading",
         },
         {
-          icon: Eye,
+          icon: EyeIcon,
           label: "Visual Inspection",
           active: location.pathname === "/visual-inspection",
           path: "/visual-inspection",
         },
         {
-          icon: CheckCircle2,
+          icon: CheckCircle2Icon,
           label: "Quantity Verification",
           active: location.pathname === "/quantity-verification",
           path: "/quantity-verification",
         },
         {
-          icon: FileText,
+          icon: FileTextIcon,
           label: "Material Identification",
           active: location.pathname === "/material-identification",
           path: "/material-identification",
         },
         {
-          icon: Settings,
+          icon: SettingsIcon,
           label: "Release to QC",
           active: location.pathname === "/release-to-qc",
           path: "/release-to-qc",
         },
         {
-          icon: CheckCircle2,
+          icon: CheckCircle2Icon,
           label: "QC Approval",
           active: location.pathname === "/qc-approval",
           path: "/qc-approval",
         },
         {
-          icon: Archive,
+          icon: ArchiveIcon,
           label: "Put Away",
           active: location.pathname === "/put-away",
           path: "/put-away",
         },
         {
-          icon: FileCheck,
+          icon: FileCheckIcon,
           label: "Close the POP",
           active: location.pathname === "/close-pop",
           path: "/close-pop",
@@ -146,9 +146,9 @@ const Sidebar = ({ isOpen, onClose }) => {
                   <span className="flex-1">{item.label}</span>
                   {item.subItems &&
                     (expandedItems[item.label] ? (
-                      <ChevronUp className="w-3 h-3 text-gray-400 transition-transform duration-200" />
+                      <ChevronUpIcon className="w-3 h-3 text-gray-400 transition-transform duration-200" />
                     ) : (
-                      <ChevronDown className="w-3 h-3 text-gray-400 transition-transform duration-200" />
+                      <ChevronDownIcon className="w-3 h-3 text-gray-400 transition-transform duration-200" />
                     ))}
                 </div>
               )}
