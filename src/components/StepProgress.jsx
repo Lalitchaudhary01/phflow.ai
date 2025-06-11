@@ -12,8 +12,11 @@ const StepProgress = ({ currentStep }) => {
     <div className="mb-8">
       {/* Desktop Progress */}
       <div className="hidden sm:flex items-center justify-between relative">
-        {/* Background line */}
-        <div className="absolute top-4 left-4 right-4 h-0.5 bg-gray-300"></div>
+        {/* Background line - only between circles */}
+        <div
+          className="absolute top-4 h-0.5 bg-gray-300"
+          style={{ left: "1rem", right: "1rem" }}
+        ></div>
 
         {steps.map((step, index) => (
           <div key={step.id} className="flex items-center relative">
@@ -40,9 +43,12 @@ const StepProgress = ({ currentStep }) => {
               </span>
             </div>
 
-            {/* Progress line overlay */}
+            {/* Progress line overlay - only between circles */}
             {index < steps.length - 1 && step.completed && (
-              <div className="absolute top-4 left-8 w-full h-0.5 bg-green-500 z-0"></div>
+              <div
+                className="absolute top-4 left-8 h-0.5 bg-green-500 z-0"
+                style={{ width: "calc(50% - 1rem)" }}
+              ></div>
             )}
           </div>
         ))}
