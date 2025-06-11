@@ -21,26 +21,29 @@ const VehicleInformation = ({ formData, setFormData }) => {
         </label>
       </div>
 
-      <div>
-        <label className="block text-sm text-gray-600 mb-2">Vehicle Type</label>
+      <div className="relative">
         <select
           value={formData.vehicleType}
           onChange={(e) =>
             setFormData({ ...formData, vehicleType: e.target.value })
           }
-          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+          id="vehicleType"
         >
           <option value="">Select Vehicle Type</option>
           <option value="truck">Truck</option>
           <option value="van">Van</option>
           <option value="trailer">Trailer</option>
         </select>
+        <label
+          htmlFor="vehicleType"
+          className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+        >
+          Vehicle Type
+        </label>
       </div>
 
-      <div>
-        <label className="block text-sm text-gray-600 mb-2">
-          License Plate
-        </label>
+      <div className="relative">
         <input
           type="text"
           value={formData.licensePlate || ""}
@@ -48,8 +51,15 @@ const VehicleInformation = ({ formData, setFormData }) => {
             setFormData({ ...formData, licensePlate: e.target.value })
           }
           placeholder="Enter license plate number"
-          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+          id="licensePlate"
         />
+        <label
+          htmlFor="licensePlate"
+          className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+        >
+          License Plate
+        </label>
       </div>
 
       <div className="text-xs text-gray-500 mb-4 leading-relaxed">
@@ -98,7 +108,7 @@ const VehicleInformation = ({ formData, setFormData }) => {
               vehicleExteriorInspected: e.target.checked,
             })
           }
-          className="w-4 h-4 text-tile-400"
+          className="w-4 h-4 text-blue-600"
         />
         <label
           htmlFor="vehicle-inspected"
@@ -109,16 +119,14 @@ const VehicleInformation = ({ formData, setFormData }) => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm text-gray-600 mb-2">
-            Vehicle Height
-          </label>
+        <div className="relative">
           <select
             value={formData.vehicleHeight}
             onChange={(e) =>
               setFormData({ ...formData, vehicleHeight: e.target.value })
             }
-            className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+            className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+            id="vehicleHeight"
           >
             <option value="">Height in Feet</option>
             <option value="8">8 feet</option>
@@ -126,24 +134,34 @@ const VehicleInformation = ({ formData, setFormData }) => {
             <option value="12">12 feet</option>
             <option value="14">14 feet</option>
           </select>
+          <label
+            htmlFor="vehicleHeight"
+            className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+          >
+            Vehicle Height
+          </label>
         </div>
 
-        <div>
-          <label className="block text-sm text-gray-600 mb-2">
-            Vehicle Width
-          </label>
+        <div className="relative">
           <select
             value={formData.vehicleWidth}
             onChange={(e) =>
               setFormData({ ...formData, vehicleWidth: e.target.value })
             }
-            className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+            className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+            id="vehicleWidth"
           >
             <option value="">Width in Feet</option>
             <option value="6">6 feet</option>
             <option value="8">8 feet</option>
             <option value="10">10 feet</option>
           </select>
+          <label
+            htmlFor="vehicleWidth"
+            className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+          >
+            Vehicle Width
+          </label>
         </div>
       </div>
     </div>

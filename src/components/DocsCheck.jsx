@@ -32,8 +32,7 @@ const DocsCheck = ({ formData, setFormData }) => {
         </label>
       </div>
 
-      <div>
-        <label className="block text-sm text-gray-600 mb-2">Packing List</label>
+      <div className="relative">
         <input
           type="text"
           placeholder="Sub-Packing List"
@@ -41,8 +40,15 @@ const DocsCheck = ({ formData, setFormData }) => {
           onChange={(e) =>
             setFormData({ ...formData, packingList: e.target.value })
           }
-          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+          id="packingList"
         />
+        <label
+          htmlFor="packingList"
+          className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+        >
+          Packing List
+        </label>
       </div>
 
       <div className="flex items-center space-x-2">
@@ -81,22 +87,26 @@ const DocsCheck = ({ formData, setFormData }) => {
         </label>
       </div>
 
-      <div>
-        <label className="block text-sm text-gray-600 mb-2">
-          Documents received by Admin
-        </label>
+      <div className="relative">
         <select
           value={formData.documentsReceived}
           onChange={(e) =>
             setFormData({ ...formData, documentsReceived: e.target.value })
           }
-          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+          id="documentsReceived"
         >
           <option value="">Packing List, Delivery Challan</option>
           <option value="packing-list">Packing List</option>
           <option value="delivery-challan">Delivery Challan</option>
           <option value="both">Both</option>
         </select>
+        <label
+          htmlFor="documentsReceived"
+          className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+        >
+          Documents received by Admin
+        </label>
       </div>
 
       <div className="text-xs text-gray-500 leading-relaxed">

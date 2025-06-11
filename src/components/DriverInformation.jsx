@@ -24,8 +24,7 @@ const DriverInformation = ({ formData, setFormData }) => {
         </label>
       </div>
 
-      <div>
-        <label className="block text-sm text-gray-600 mb-2">Driver Name</label>
+      <div className="relative">
         <input
           type="text"
           placeholder="Enter the driver name"
@@ -33,8 +32,15 @@ const DriverInformation = ({ formData, setFormData }) => {
           onChange={(e) =>
             setFormData({ ...formData, driverName: e.target.value })
           }
-          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+          id="driverName"
         />
+        <label
+          htmlFor="driverName"
+          className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+        >
+          Driver Name
+        </label>
       </div>
 
       <div className="flex items-center space-x-2">
@@ -58,10 +64,7 @@ const DriverInformation = ({ formData, setFormData }) => {
         </label>
       </div>
 
-      <div>
-        <label className="block text-sm text-gray-600 mb-2">
-          Transport Company
-        </label>
+      <div className="relative">
         <input
           type="text"
           placeholder="Enter the name of the transport company"
@@ -69,8 +72,15 @@ const DriverInformation = ({ formData, setFormData }) => {
           onChange={(e) =>
             setFormData({ ...formData, transportCompany: e.target.value })
           }
-          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+          className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+          id="transportCompany"
         />
+        <label
+          htmlFor="transportCompany"
+          className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+        >
+          Transport Company
+        </label>
       </div>
 
       <div className="flex items-center space-x-2">
