@@ -15,7 +15,7 @@ const StepProgress = ({ currentStep }) => {
         {/* Background line - only between circles */}
         <div
           className="absolute top-4 h-0.5 bg-gray-300"
-          style={{ left: "1rem", right: "1rem" }}
+          style={{ left: "3rem", right: "3rem" }}
         ></div>
 
         {steps.map((step, index) => (
@@ -24,7 +24,7 @@ const StepProgress = ({ currentStep }) => {
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium relative z-10 ${
                   step.completed
-                    ? "bg-green-500 text-white"
+                    ? "bg-teal-500 text-white"
                     : currentStep === step.id
                     ? "bg-teal-600 text-white"
                     : "bg-white border-2 border-gray-300 text-gray-600"
@@ -46,7 +46,7 @@ const StepProgress = ({ currentStep }) => {
             {/* Progress line overlay - only between circles */}
             {index < steps.length - 1 && step.completed && (
               <div
-                className="absolute top-4 left-8 h-0.5 bg-green-500 z-0"
+                className="absolute top-4 left-8 h-0.5 bg-teal-500 z-0"
                 style={{ width: "calc(50% - 1rem)" }}
               ></div>
             )}
