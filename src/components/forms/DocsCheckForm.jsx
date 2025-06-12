@@ -11,10 +11,25 @@ const DocsCheckForm = (props) => {
   return (
     <div className="space-y-4 sm:space-y-6">
       <div>
-        <label className="block text-sm text-gray-600 mb-2">
-          Bill of Lading Number
-        </label>
-        <div className="text-xs text-gray-500 mb-2 leading-relaxed">
+        {/* Added input box for Bill of Lading Number */}
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Enter Bill of Lading Number"
+            value={formData.billOfLadingNumber || ""}
+            onChange={(e) => handleChange("billOfLadingNumber", e.target.value)}
+            className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
+            id="billOfLadingNumber"
+          />
+          <label
+            htmlFor="billOfLadingNumber"
+            className="absolute left-3 -top-2.5 text-xs text-gray-600 bg-white px-2 peer-focus:text-blue-600 transition-all duration-200"
+          >
+            Bill of Lading Number
+          </label>
+        </div>
+
+        <div className="text-xs text-gray-500 mt-2 leading-relaxed">
           In accordance with 21 CFR 111.108 and 21 CFR 111.130, the complete
           audit trail of testing number must be documented and verified for all
           finished materials delivery.
