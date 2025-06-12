@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Nav";
 import Sidebar from "./components/Sidebar";
-import DriverCheckInSystem from "./components/DriverCheckInSystem";
+import DriverCheckInSystem from "./DriverCheckInSystem";
 import HomePage from "./components/HomePage";
 
 const App = () => {

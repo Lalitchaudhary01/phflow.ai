@@ -1,33 +1,27 @@
 import React, { useState } from "react";
-import Breadcrumb from "./Breadcrumb";
-import StepProgress from "./StepProgress";
-import DriverInformation from "./DriverInformation";
-import DocsCheck from "./DocsCheck";
-import VehicleInformation from "./VehicleInformation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Form from "@rjsf/core";
+import validator from "@rjsf/validator-ajv8"; // Add validator import
+import Breadcrumb from "./components/Breadcrumb";
+import StepProgress from "./components/StepProgress";
+import DriverInformationForm from "./components/forms/DriverInformationForm";
+import DocsCheckForm from "./components/forms/DocsCheckForm";
+import VehicleInformationForm from "./components/forms/VehicleInformationForm";
+import { schema } from "./schemas/driverCheckInSchema";
+import { uiSchema } from "./schemas/uiSchema";
+
+const fields = {
+  DriverInformationForm,
+  DocsCheckForm,
+  VehicleInformationForm,
+};
 
 const DriverCheckInSystem = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
-    // Step 1 data
-    deliveryAppointmentConfirmed: false,
-    driverName: "",
-    driverIdentificationVerified: false,
-    transportCompany: "",
-    transportCompanyVerified: false,
-    // Step 2 data
-    supplierInfoVerified: false,
-    packingList: "",
-    poInPackingList: false,
-    poMaterialsVerified: false,
-    documentsReceived: "",
-    // Step 3 data
-    vehicleSecurity: false,
-    vehicleType: "",
-    exteriorSecuritySeals: false,
-    vehicleExteriorInspected: false,
-    vehicleHeight: "",
-    vehicleWidth: "",
+    step1: {},
+    step2: {},
+    step3: {},
   });
 
   const handleNext = () => {
@@ -47,21 +41,26 @@ const DriverCheckInSystem = () => {
     console.log("Form Data:", formData);
   };
 
-  const renderCurrentStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <DriverInformation formData={formData} setFormData={setFormData} />
-        );
-      case 2:
-        return <DocsCheck formData={formData} setFormData={setFormData} />;
-      case 3:
-        return (
-          <VehicleInformation formData={formData} setFormData={setFormData} />
-        );
-      default:
-        return null;
-    }
+  const handleFormChange = ({ formData }) => {
+    setFormData((prev) => ({
+      ...prev,
+      [`step${currentStep}`]: formData,
+    }));
+  };
+
+  const getCurrentStepSchema = () => {
+    return {
+      ...schema,
+      properties: {
+        [`step${currentStep}`]: schema.properties[`step${currentStep}`],
+      },
+    };
+  };
+
+  const getCurrentStepUiSchema = () => {
+    return {
+      [`step${currentStep}`]: uiSchema[`step${currentStep}`],
+    };
   };
 
   return (
@@ -80,7 +79,20 @@ const DriverCheckInSystem = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
         <StepProgress currentStep={currentStep} />
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6 lg:p-8">
-          {renderCurrentStep()}
+          <Form
+            schema={getCurrentStepSchema()}
+            uiSchema={getCurrentStepUiSchema()}
+            formData={formData}
+            onChange={handleFormChange}
+            fields={fields}
+            validator={validator} // Add validator prop
+            liveValidate
+            showErrorList={false}
+            noHtml5Validate
+          >
+            {/* Empty children to hide submit button */}
+            <div></div>
+          </Form>
 
           {/* Navigation Buttons */}
           <div className="flex flex-col sm:flex-row justify-between items-center mt-6 sm:mt-8 pt-6 border-t border-gray-200 space-y-3 sm:space-y-0 relative">

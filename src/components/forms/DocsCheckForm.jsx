@@ -1,6 +1,21 @@
 import React from "react";
 
-const DocsCheck = ({ formData, setFormData }) => {
+const DocsCheckForm = (props) => {
+  const { formData = {}, onChange, schema = {} } = props;
+
+  const handleChange = (field, value) => {
+    const newFormData = { ...formData, [field]: value };
+    onChange(newFormData);
+  };
+
+  // Safe access to schema properties with fallbacks
+  const getSchemaProperty = (propertyName) => {
+    return schema.properties?.[propertyName] || {};
+  };
+
+  const documentsReceivedProperty = getSchemaProperty("documentsReceived");
+  const packingListProperty = getSchemaProperty("packingList");
+
   return (
     <div className="space-y-4 sm:space-y-6">
       <div>
@@ -18,9 +33,9 @@ const DocsCheck = ({ formData, setFormData }) => {
         <input
           type="checkbox"
           id="supplier-verified"
-          checked={formData.supplierInfoVerified}
+          checked={formData.supplierInfoVerified || false}
           onChange={(e) =>
-            setFormData({ ...formData, supplierInfoVerified: e.target.checked })
+            handleChange("supplierInfoVerified", e.target.checked)
           }
           className="w-4 h-4 text-blue-600"
         />
@@ -35,11 +50,9 @@ const DocsCheck = ({ formData, setFormData }) => {
       <div className="relative">
         <input
           type="text"
-          placeholder="Sub-Packing List"
-          value={formData.packingList}
-          onChange={(e) =>
-            setFormData({ ...formData, packingList: e.target.value })
-          }
+          placeholder={packingListProperty.placeholder || "Sub-Packing List"}
+          value={formData.packingList || ""}
+          onChange={(e) => handleChange("packingList", e.target.value)}
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
           id="packingList"
         />
@@ -55,10 +68,8 @@ const DocsCheck = ({ formData, setFormData }) => {
         <input
           type="checkbox"
           id="po-packing"
-          checked={formData.poInPackingList}
-          onChange={(e) =>
-            setFormData({ ...formData, poInPackingList: e.target.checked })
-          }
+          checked={formData.poInPackingList || false}
+          onChange={(e) => handleChange("poInPackingList", e.target.checked)}
           className="w-4 h-4 text-blue-600"
         />
         <label
@@ -73,9 +84,9 @@ const DocsCheck = ({ formData, setFormData }) => {
         <input
           type="checkbox"
           id="po-materials"
-          checked={formData.poMaterialsVerified}
+          checked={formData.poMaterialsVerified || false}
           onChange={(e) =>
-            setFormData({ ...formData, poMaterialsVerified: e.target.checked })
+            handleChange("poMaterialsVerified", e.target.checked)
           }
           className="w-4 h-4 text-blue-600"
         />
@@ -89,17 +100,17 @@ const DocsCheck = ({ formData, setFormData }) => {
 
       <div className="relative">
         <select
-          value={formData.documentsReceived}
-          onChange={(e) =>
-            setFormData({ ...formData, documentsReceived: e.target.value })
-          }
+          value={formData.documentsReceived || ""}
+          onChange={(e) => handleChange("documentsReceived", e.target.value)}
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
           id="documentsReceived"
         >
-          <option value="">Packing List, Delivery Challan</option>
-          <option value="packing-list">Packing List</option>
-          <option value="delivery-challan">Delivery Challan</option>
-          <option value="both">Both</option>
+          <option value="">Select Documents Status</option>
+          {documentsReceivedProperty.enum?.map((value, index) => (
+            <option key={value} value={value}>
+              {documentsReceivedProperty.enumNames?.[index] || value}
+            </option>
+          )) || null}
         </select>
         <label
           htmlFor="documentsReceived"
@@ -118,4 +129,4 @@ const DocsCheck = ({ formData, setFormData }) => {
   );
 };
 
-export default DocsCheck;
+export default DocsCheckForm;

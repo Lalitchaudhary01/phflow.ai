@@ -1,16 +1,23 @@
 import React from "react";
 
-const VehicleInformation = ({ formData, setFormData }) => {
+const VehicleInformationForm = (props) => {
+  // RJSF passes different props to custom field components
+  const { formData = {}, onChange, schema, uiSchema } = props;
+
+  // Helper function to update form data in RJSF format
+  const handleChange = (field, value) => {
+    const newFormData = { ...formData, [field]: value };
+    onChange(newFormData);
+  };
+
   return (
     <div className="space-y-4 sm:space-y-6">
       <div className="flex items-center space-x-2">
         <input
           type="checkbox"
           id="vehicle-security"
-          checked={formData.vehicleSecurity}
-          onChange={(e) =>
-            setFormData({ ...formData, vehicleSecurity: e.target.checked })
-          }
+          checked={formData.vehicleSecurity || false}
+          onChange={(e) => handleChange("vehicleSecurity", e.target.checked)}
           className="w-4 h-4 text-blue-600"
         />
         <label
@@ -23,10 +30,8 @@ const VehicleInformation = ({ formData, setFormData }) => {
 
       <div className="relative">
         <select
-          value={formData.vehicleType}
-          onChange={(e) =>
-            setFormData({ ...formData, vehicleType: e.target.value })
-          }
+          value={formData.vehicleType || ""}
+          onChange={(e) => handleChange("vehicleType", e.target.value)}
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
           id="vehicleType"
         >
@@ -42,14 +47,18 @@ const VehicleInformation = ({ formData, setFormData }) => {
           Vehicle Type
         </label>
       </div>
+      <div className="text-xs text-gray-500 mb-4 leading-relaxed">
+        Accessing personnel must verify the vehicle type is suitable for
+        maintaining material quality during transit, with particular attention
+        to temperature control capabilities as specified in 21 CFR 111.10 for
+        the materials requiring controlled environmental conditions.
+      </div>
 
       <div className="relative">
         <input
           type="text"
           value={formData.licensePlate || ""}
-          onChange={(e) =>
-            setFormData({ ...formData, licensePlate: e.target.value })
-          }
+          onChange={(e) => handleChange("licensePlate", e.target.value)}
           placeholder="Enter license plate number"
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
           id="licensePlate"
@@ -63,13 +72,6 @@ const VehicleInformation = ({ formData, setFormData }) => {
       </div>
 
       <div className="text-xs text-gray-500 mb-4 leading-relaxed">
-        Accessing personnel must verify the vehicle type is suitable for
-        maintaining material quality during transit, with particular attention
-        to temperature control capabilities as specified in 21 CFR 111.10 for
-        the materials requiring controlled environmental conditions.
-      </div>
-
-      <div className="text-xs text-gray-500 mb-4 leading-relaxed">
         Accessing personnel must check the license plate information following
         established written procedures per 21 CFR 111.103(a) and verify it
         matches any pre-notification documentation provided by the
@@ -80,12 +82,9 @@ const VehicleInformation = ({ formData, setFormData }) => {
         <input
           type="checkbox"
           id="exterior-security"
-          checked={formData.exteriorSecuritySeals}
+          checked={formData.exteriorSecuritySeals || false}
           onChange={(e) =>
-            setFormData({
-              ...formData,
-              exteriorSecuritySeals: e.target.checked,
-            })
+            handleChange("exteriorSecuritySeals", e.target.checked)
           }
           className="w-4 h-4 text-blue-600"
         />
@@ -101,12 +100,9 @@ const VehicleInformation = ({ formData, setFormData }) => {
         <input
           type="checkbox"
           id="vehicle-inspected"
-          checked={formData.vehicleExteriorInspected}
+          checked={formData.vehicleExteriorInspected || false}
           onChange={(e) =>
-            setFormData({
-              ...formData,
-              vehicleExteriorInspected: e.target.checked,
-            })
+            handleChange("vehicleExteriorInspected", e.target.checked)
           }
           className="w-4 h-4 text-blue-600"
         />
@@ -121,10 +117,8 @@ const VehicleInformation = ({ formData, setFormData }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="relative">
           <select
-            value={formData.vehicleHeight}
-            onChange={(e) =>
-              setFormData({ ...formData, vehicleHeight: e.target.value })
-            }
+            value={formData.vehicleHeight || ""}
+            onChange={(e) => handleChange("vehicleHeight", e.target.value)}
             className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
             id="vehicleHeight"
           >
@@ -144,10 +138,8 @@ const VehicleInformation = ({ formData, setFormData }) => {
 
         <div className="relative">
           <select
-            value={formData.vehicleWidth}
-            onChange={(e) =>
-              setFormData({ ...formData, vehicleWidth: e.target.value })
-            }
+            value={formData.vehicleWidth || ""}
+            onChange={(e) => handleChange("vehicleWidth", e.target.value)}
             className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
             id="vehicleWidth"
           >
@@ -168,4 +160,4 @@ const VehicleInformation = ({ formData, setFormData }) => {
   );
 };
 
-export default VehicleInformation;
+export default VehicleInformationForm;
