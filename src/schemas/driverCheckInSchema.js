@@ -1,3 +1,4 @@
+// driverCheckInSchema.js
 export const schema = {
   type: "object",
   properties: {
@@ -8,6 +9,7 @@ export const schema = {
         deliveryAppointmentConfirmed: {
           type: "boolean",
           title: "Delivery Appointment Confirmed",
+          default: false,
         },
         driverName: {
           type: "string",
@@ -16,6 +18,7 @@ export const schema = {
         driverIdentificationVerified: {
           type: "boolean",
           title: "Driver Identification Verified",
+          default: false,
         },
         transportCompany: {
           type: "string",
@@ -24,6 +27,7 @@ export const schema = {
         transportCompanyVerified: {
           type: "boolean",
           title: "Transport Company Identification Verified",
+          default: false,
         },
       },
     },
@@ -34,6 +38,7 @@ export const schema = {
         supplierInfoVerified: {
           type: "boolean",
           title: "Supplier Information Verified",
+          default: false,
         },
         packingList: {
           type: "string",
@@ -42,17 +47,19 @@ export const schema = {
         poInPackingList: {
           type: "boolean",
           title: "PO in Packing List",
+          default: false,
         },
         poMaterialsVerified: {
           type: "boolean",
           title: "PO Materials Verified",
+          default: false,
         },
         documentsReceived: {
           type: "string",
           title: "Documents received by Admin",
           enum: ["", "packing-list", "delivery-challan", "both"],
           enumNames: [
-            "Packing List, Delivery Challan",
+            "Select Documents Status",
             "Packing List",
             "Delivery Challan",
             "Both",
@@ -67,6 +74,7 @@ export const schema = {
         vehicleSecurity: {
           type: "boolean",
           title: "Vehicle Security: No extra members in vehicle",
+          default: false,
         },
         vehicleType: {
           type: "string",
@@ -81,10 +89,12 @@ export const schema = {
         exteriorSecuritySeals: {
           type: "boolean",
           title: "Exterior Security Seals Intact",
+          default: false,
         },
         vehicleExteriorInspected: {
           type: "boolean",
           title: "Vehicle Exterior Inspected",
+          default: false,
         },
         vehicleHeight: {
           type: "string",

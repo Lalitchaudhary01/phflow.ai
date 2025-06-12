@@ -1,3 +1,4 @@
+// uiSchema.js
 export const uiSchema = {
   step1: {
     "ui:field": "DriverInformationForm",
@@ -31,6 +32,9 @@ export const uiSchema = {
     poMaterialsVerified: {
       "ui:widget": "checkbox",
     },
+    documentsReceived: {
+      "ui:placeholder": "Select Documents Status",
+    },
   },
   step3: {
     "ui:field": "VehicleInformationForm",
@@ -42,6 +46,15 @@ export const uiSchema = {
     },
     vehicleExteriorInspected: {
       "ui:widget": "checkbox",
+    },
+    vehicleType: {
+      "ui:placeholder": "Select Vehicle Type",
+    },
+    vehicleHeight: {
+      "ui:placeholder": "Height in Feet",
+    },
+    vehicleWidth: {
+      "ui:placeholder": "Width in Feet",
     },
   },
 };

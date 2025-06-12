@@ -1,10 +1,8 @@
 import React from "react";
 
 const VehicleInformationForm = (props) => {
-  // RJSF passes different props to custom field components
-  const { formData = {}, onChange, schema, uiSchema } = props;
+  const { formData = {}, onChange, schema = {} } = props;
 
-  // Helper function to update form data in RJSF format
   const handleChange = (field, value) => {
     const newFormData = { ...formData, [field]: value };
     onChange(newFormData);
@@ -35,10 +33,11 @@ const VehicleInformationForm = (props) => {
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
           id="vehicleType"
         >
-          <option value="">Select Vehicle Type</option>
-          <option value="truck">Truck</option>
-          <option value="van">Van</option>
-          <option value="trailer">Trailer</option>
+          {schema.properties?.vehicleType?.enum?.map((value, index) => (
+            <option key={value} value={value}>
+              {schema.properties?.vehicleType?.enumNames?.[index] || value}
+            </option>
+          ))}
         </select>
         <label
           htmlFor="vehicleType"
@@ -122,11 +121,11 @@ const VehicleInformationForm = (props) => {
             className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
             id="vehicleHeight"
           >
-            <option value="">Height in Feet</option>
-            <option value="8">8 feet</option>
-            <option value="10">10 feet</option>
-            <option value="12">12 feet</option>
-            <option value="14">14 feet</option>
+            {schema.properties?.vehicleHeight?.enum?.map((value, index) => (
+              <option key={value} value={value}>
+                {schema.properties?.vehicleHeight?.enumNames?.[index] || value}
+              </option>
+            ))}
           </select>
           <label
             htmlFor="vehicleHeight"
@@ -143,10 +142,11 @@ const VehicleInformationForm = (props) => {
             className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
             id="vehicleWidth"
           >
-            <option value="">Width in Feet</option>
-            <option value="6">6 feet</option>
-            <option value="8">8 feet</option>
-            <option value="10">10 feet</option>
+            {schema.properties?.vehicleWidth?.enum?.map((value, index) => (
+              <option key={value} value={value}>
+                {schema.properties?.vehicleWidth?.enumNames?.[index] || value}
+              </option>
+            ))}
           </select>
           <label
             htmlFor="vehicleWidth"

@@ -8,14 +8,6 @@ const DocsCheckForm = (props) => {
     onChange(newFormData);
   };
 
-  // Safe access to schema properties with fallbacks
-  const getSchemaProperty = (propertyName) => {
-    return schema.properties?.[propertyName] || {};
-  };
-
-  const documentsReceivedProperty = getSchemaProperty("documentsReceived");
-  const packingListProperty = getSchemaProperty("packingList");
-
   return (
     <div className="space-y-4 sm:space-y-6">
       <div>
@@ -50,7 +42,9 @@ const DocsCheckForm = (props) => {
       <div className="relative">
         <input
           type="text"
-          placeholder={packingListProperty.placeholder || "Sub-Packing List"}
+          placeholder={
+            schema.properties?.packingList?.placeholder || "Sub-Packing List"
+          }
           value={formData.packingList || ""}
           onChange={(e) => handleChange("packingList", e.target.value)}
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
@@ -105,12 +99,12 @@ const DocsCheckForm = (props) => {
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
           id="documentsReceived"
         >
-          <option value="">Select Documents Status</option>
-          {documentsReceivedProperty.enum?.map((value, index) => (
+          {schema.properties?.documentsReceived?.enum?.map((value, index) => (
             <option key={value} value={value}>
-              {documentsReceivedProperty.enumNames?.[index] || value}
+              {schema.properties?.documentsReceived?.enumNames?.[index] ||
+                value}
             </option>
-          )) || null}
+          ))}
         </select>
         <label
           htmlFor="documentsReceived"

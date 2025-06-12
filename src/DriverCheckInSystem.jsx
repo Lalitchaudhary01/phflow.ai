@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Form from "@rjsf/core";
-import validator from "@rjsf/validator-ajv8"; // Add validator import
+import validator from "@rjsf/validator-ajv8";
 import Breadcrumb from "./components/Breadcrumb";
 import StepProgress from "./components/StepProgress";
 import DriverInformationForm from "./components/forms/DriverInformationForm";
@@ -41,16 +41,28 @@ const DriverCheckInSystem = () => {
     console.log("Form Data:", formData);
   };
 
-  const handleFormChange = ({ formData }) => {
-    setFormData((prev) => ({
-      ...prev,
-      [`step${currentStep}`]: formData,
-    }));
+  const handleFormChange = ({ formData: newFormData }) => {
+    // Only update if the data has actually changed
+    const currentStepKey = `step${currentStep}`;
+    const newStepData = newFormData[currentStepKey] || {};
+
+    setFormData((prev) => {
+      // Check if the data is actually different to prevent unnecessary updates
+      if (
+        JSON.stringify(prev[currentStepKey]) !== JSON.stringify(newStepData)
+      ) {
+        return {
+          ...prev,
+          [currentStepKey]: newStepData,
+        };
+      }
+      return prev;
+    });
   };
 
   const getCurrentStepSchema = () => {
     return {
-      ...schema,
+      type: "object",
       properties: {
         [`step${currentStep}`]: schema.properties[`step${currentStep}`],
       },
@@ -60,6 +72,12 @@ const DriverCheckInSystem = () => {
   const getCurrentStepUiSchema = () => {
     return {
       [`step${currentStep}`]: uiSchema[`step${currentStep}`],
+    };
+  };
+
+  const getCurrentStepFormData = () => {
+    return {
+      [`step${currentStep}`]: formData[`step${currentStep}`] || {},
     };
   };
 
@@ -82,10 +100,10 @@ const DriverCheckInSystem = () => {
           <Form
             schema={getCurrentStepSchema()}
             uiSchema={getCurrentStepUiSchema()}
-            formData={formData}
+            formData={getCurrentStepFormData()}
             onChange={handleFormChange}
             fields={fields}
-            validator={validator} // Add validator prop
+            validator={validator}
             liveValidate
             showErrorList={false}
             noHtml5Validate

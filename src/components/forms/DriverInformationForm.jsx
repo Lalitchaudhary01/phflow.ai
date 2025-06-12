@@ -1,12 +1,11 @@
 import React from "react";
 
-const DriverInformationForm = ({ formData, onChange, schema }) => {
-  const handleChange = (field) => (event) => {
-    const value =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
-    onChange({ ...formData, [field]: value });
+const DriverInformationForm = (props) => {
+  const { formData = {}, onChange, schema } = props;
+
+  const handleChange = (field, value) => {
+    const newFormData = { ...formData, [field]: value };
+    onChange(newFormData);
   };
 
   return (
@@ -16,7 +15,9 @@ const DriverInformationForm = ({ formData, onChange, schema }) => {
           type="checkbox"
           id="delivery-appointment"
           checked={formData.deliveryAppointmentConfirmed || false}
-          onChange={handleChange("deliveryAppointmentConfirmed")}
+          onChange={(e) =>
+            handleChange("deliveryAppointmentConfirmed", e.target.checked)
+          }
           className="w-4 h-4 text-blue-600"
         />
         <label
@@ -31,10 +32,11 @@ const DriverInformationForm = ({ formData, onChange, schema }) => {
         <input
           type="text"
           placeholder={
-            schema.properties.driverName.placeholder || "Enter the driver name"
+            schema.properties?.driverName?.placeholder ||
+            "Enter the driver name"
           }
           value={formData.driverName || ""}
-          onChange={handleChange("driverName")}
+          onChange={(e) => handleChange("driverName", e.target.value)}
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
           id="driverName"
         />
@@ -51,7 +53,9 @@ const DriverInformationForm = ({ formData, onChange, schema }) => {
           type="checkbox"
           id="driver-verified"
           checked={formData.driverIdentificationVerified || false}
-          onChange={handleChange("driverIdentificationVerified")}
+          onChange={(e) =>
+            handleChange("driverIdentificationVerified", e.target.checked)
+          }
           className="w-4 h-4 text-blue-600"
         />
         <label
@@ -66,11 +70,11 @@ const DriverInformationForm = ({ formData, onChange, schema }) => {
         <input
           type="text"
           placeholder={
-            schema.properties.transportCompany.placeholder ||
+            schema.properties?.transportCompany?.placeholder ||
             "Enter the name of the transport company"
           }
           value={formData.transportCompany || ""}
-          onChange={handleChange("transportCompany")}
+          onChange={(e) => handleChange("transportCompany", e.target.value)}
           className="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base peer"
           id="transportCompany"
         />
@@ -87,7 +91,9 @@ const DriverInformationForm = ({ formData, onChange, schema }) => {
           type="checkbox"
           id="transport-verified"
           checked={formData.transportCompanyVerified || false}
-          onChange={handleChange("transportCompanyVerified")}
+          onChange={(e) =>
+            handleChange("transportCompanyVerified", e.target.checked)
+          }
           className="w-4 h-4 text-blue-600"
         />
         <label
