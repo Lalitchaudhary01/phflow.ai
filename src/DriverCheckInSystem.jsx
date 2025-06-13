@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@heroui/react";
 import Form from "@rjsf/core";
 import validator from "@rjsf/validator-ajv8";
 import Breadcrumb from "./components/Breadcrumb";
@@ -115,7 +116,7 @@ const DriverCheckInSystem = () => {
           {/* Navigation Buttons */}
           <div className="flex flex-col sm:flex-row justify-between items-center mt-6 sm:mt-8 pt-6 border-t border-gray-200 space-y-3 sm:space-y-0 relative">
             {/* Back Button - Left */}
-            <button
+            <Button
               onClick={handleBack}
               disabled={currentStep === 1}
               className={`flex items-center gap-2 px-4 sm:px-6 py-2 rounded-lg font-medium text-sm sm:text-base ${
@@ -123,35 +124,39 @@ const DriverCheckInSystem = () => {
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
+              variant="flat"
             >
               <ChevronLeft size={16} />
               BACK
-            </button>
+            </Button>
 
             {/* Save & Resume Later - Center */}
-            <button
+            <Button
               onClick={handleSave}
               className="px-4 sm:px-6 py-2 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-600 transition-colors text-sm sm:text-base sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2"
+              color="primary"
             >
               SAVE & RESUME LATER
-            </button>
+            </Button>
 
             {/* Next Button - Right */}
             {currentStep < 3 ? (
-              <button
+              <Button
                 onClick={handleNext}
                 className="flex items-center gap-2 px-4 sm:px-6 py-2 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-600 transition-colors text-sm sm:text-base"
+                color="primary"
               >
                 NEXT
                 <ChevronRight size={16} />
-              </button>
+              </Button>
             ) : (
-              <button
+              <Button
                 onClick={handleSave}
                 className="px-4 sm:px-6 py-2 bg-teal-500 text-white rounded-lg font-medium hover:bg-teal-600 transition-colors text-sm sm:text-base"
+                color="primary"
               >
                 SAVE
-              </button>
+              </Button>
             )}
           </div>
         </div>
