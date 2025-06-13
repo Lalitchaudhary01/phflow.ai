@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import { Link, useLocation } from "react-router-dom";
+import { Card, CardBody, Button } from "@heroui/react";
 import {
   Person as PersonIcon,
   Home as HomeIcon,
@@ -139,19 +139,24 @@ const Sidebar = ({ isOpen, onClose }) => {
                   <span className="flex-1">{item.label}</span>
                 </Link>
               ) : (
-                <div
-                  className={`flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-50 transition-colors duration-150 text-gray-600`}
+                <Button
+                  variant="light"
+                  className={`w-full justify-start px-4 py-2 text-sm cursor-pointer hover:bg-gray-50 transition-colors duration-150 text-gray-600 h-auto min-h-0 rounded-none bg-transparent`}
                   onClick={() => item.subItems && toggleExpanded(item.label)}
-                >
-                  <item.icon className="w-4 h-4 mr-3 text-gray-500" />
-                  <span className="flex-1">{item.label}</span>
-                  {item.subItems &&
+                  startContent={
+                    <item.icon className="w-4 h-4 mr-3 text-gray-500" />
+                  }
+                  endContent={
+                    item.subItems &&
                     (expandedItems[item.label] ? (
                       <ChevronUpIcon className="w-3 h-3 text-gray-400 transition-transform duration-200" />
                     ) : (
                       <ChevronDownIcon className="w-3 h-3 text-gray-400 transition-transform duration-200" />
-                    ))}
-                </div>
+                    ))
+                  }
+                >
+                  <span className="flex-1 text-left">{item.label}</span>
+                </Button>
               )}
 
               {item.subItems && expandedItems[item.label] && (

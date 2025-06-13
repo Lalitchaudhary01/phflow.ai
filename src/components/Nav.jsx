@@ -1,5 +1,6 @@
 import React from "react";
-import { Menu, User, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { User } from "@heroui/react";
 import { Bedtime, Notifications } from "@mui/icons-material";
 
 const Nav = ({ onMenuToggle, isMobileMenuOpen }) => {
@@ -23,8 +24,12 @@ const Nav = ({ onMenuToggle, isMobileMenuOpen }) => {
       <div className="flex items-center space-x-2 sm:space-x-4">
         <Bedtime className="w-5 h-5 cursor-pointer hover:bg-teal-700 hover:bg-opacity-50 p-1 rounded" />
         <Notifications className="w-5 h-5 cursor-pointer hover:bg-teal-700 hover:bg-opacity-50 p-1 rounded" />
-        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange-500 rounded-full flex items-center justify-center cursor-pointer">
-          <User className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+        <div className="cursor-pointer hover:bg-teal-700 hover:bg-opacity-50 p-1 rounded">
+          <img
+            src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+            alt="Profile"
+            className="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover"
+          />
         </div>
       </div>
     </div>
