@@ -1,5 +1,6 @@
 import React from "react";
 import { Check } from "lucide-react";
+import { Progress, Chip } from "@heroui/react";
 
 const StepProgress = ({ currentStep }) => {
   const steps = [
@@ -21,8 +22,9 @@ const StepProgress = ({ currentStep }) => {
         {steps.map((step, index) => (
           <div key={step.id} className="flex items-center relative">
             <div className="flex flex-col items-center">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium relative z-10 ${
+              <Chip
+                variant="solid"
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium relative z-10 min-w-8 ${
                   step.completed
                     ? "bg-green-500 text-white"
                     : currentStep === step.id
@@ -31,7 +33,7 @@ const StepProgress = ({ currentStep }) => {
                 }`}
               >
                 {step.completed ? <Check className="w-4 h-4" /> : step.id}
-              </div>
+              </Chip>
               <span
                 className={`mt-2 text-sm text-center ${
                   currentStep === step.id
@@ -60,8 +62,9 @@ const StepProgress = ({ currentStep }) => {
       {/* Mobile Progress */}
       <div className="sm:hidden">
         <div className="flex items-center justify-center mb-4">
-          <div
-            className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+          <Chip
+            variant="solid"
+            className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium min-w-8 ${
               steps[currentStep - 1].completed
                 ? "bg-green-500 text-white"
                 : currentStep === steps[currentStep - 1].id
@@ -74,7 +77,7 @@ const StepProgress = ({ currentStep }) => {
             ) : (
               currentStep
             )}
-          </div>
+          </Chip>
         </div>
         <div className="text-center">
           <span
